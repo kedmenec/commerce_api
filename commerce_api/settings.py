@@ -40,10 +40,19 @@ INSTALLED_APPS = [
     # DRF
     'rest_framework',
     'rest_framework.authtoken',
+    # DRF Auth
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
     # Our APP
     'products.apps.ProductsConfig',
 
 ]
+
+# For django auth register
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -145,7 +154,7 @@ REST_FRAMEWORK = {
         # TokenAuth for the Application (react in this case)
         'rest_framework.authentication.TokenAuthentication',
         # Session for the DRF UI
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
 
     ),
     'DEFAULT_PERMISSION_CLASSES': [

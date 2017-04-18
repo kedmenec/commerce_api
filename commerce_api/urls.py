@@ -17,9 +17,16 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.authtoken import views
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('products.urls')),
-    url(r'^api-token-auth/', views.obtain_auth_token)
+    # url(r'^api-token-auth/', views.obtain_auth_token),
+
+    # Need to customise these views because the session based auth required for django admin
+    # causes CSRF errors.  The front end only uses token based auth.
+
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^rest-auth/', include('rest_auth.urls')),
 ]
 
