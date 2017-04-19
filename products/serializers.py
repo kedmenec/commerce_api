@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, Group
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'title', 'price', 'description', 'tags', 'inventory_quantity', 'image_url')
+        fields = ('id', 'title', 'price', 'colour', 'category', 'image')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
