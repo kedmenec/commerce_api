@@ -1,5 +1,5 @@
-from products.models import Product
-from products.serializers import ProductSerializer, UserSerializer, GroupSerializer
+from products.models import Product, Review
+from products.serializers import ProductSerializer, ReviewSerializer, UserSerializer, GroupSerializer
 from rest_framework import generics, permissions
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
@@ -10,6 +10,15 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    # def perform_create(self, serializer):
+
+    #     serializer.save(user=self.request.user)
 
 class UserViewSet(viewsets.ModelViewSet):
     """
