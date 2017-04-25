@@ -12,14 +12,6 @@ class Conflict(APIException):
     default_code = 'conflict'
 
 
-class ProductSerializer(serializers.ModelSerializer):
-
-    reviews = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
-    class Meta:
-        model = Product
-        fields = ('id', 'title', 'price', 'colour', 'category', 'image', 'reviews')
-
 class ReviewSerializer(serializers.ModelSerializer):
     # Set the user to the logged in user on create.
     user = serializers.PrimaryKeyRelatedField(
@@ -41,6 +33,15 @@ class ReviewSerializer(serializers.ModelSerializer):
             r = Review(**validated_data)
             r.save()
             return r
+
+
+class ProductSerializer(serializers.ModelSerializer):
+
+    reviews = ReviewSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Product
+        fields = ('id', 'title', 'price', 'colour', 'category', 'image', 'reviews')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
