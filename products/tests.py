@@ -77,12 +77,3 @@ class AccountTests(APITestCase):
         url = '/products/'
         response = self.client.get(url, format='json')
         self.assertEqual(len(response.data['results'][0]['reviews']), 1)
-
-        url = '/reviews/{review_id}/'.format(review_id=response.data['results'][0]['reviews'][0])
-
-        response = self.client.get(url, format='json')
-        self.assertEqual(response.data['text'], data['text'])
-
-
-
-
